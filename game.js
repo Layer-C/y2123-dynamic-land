@@ -49,13 +49,14 @@ var sceneLoaded = function (meshes) {
   camera.attachControl(canvas, true);
 
   scene.createDefaultEnvironment();
-  engine.hideLoadingUI();
 
   // Load the sound and play it automatically once ready
   var music = new BABYLON.Sound("Savannah", "Savannah.mp3", scene, null, {
     loop: true,
     autoplay: true,
   });
+
+  engine.hideLoadingUI();
 
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
@@ -70,13 +71,19 @@ var sceneLoaded = function (meshes) {
             break;
           case "b":
           case "B":
+            for (let i = 0; i < meshes.length; i++) {
+              meshes[i].isVisible = true;
+            }
+            break;
+          case "c":
+          case "C":
             console.log(meshes[0]);
             for (let i = 0; i < 10000; i++) {
               meshes[i].isVisible = false;
             }
             break;
-          case "c":
-          case "C":
+          case "d":
+          case "D":
             console.log(meshes[0]);
             for (let i = 0; i < 10000; i++) {
               meshes[i].isVisible = true;
