@@ -63,10 +63,23 @@ var sceneLoaded = function (meshes) {
         switch (kbInfo.event.key) {
           case "a":
           case "A":
+            for (let i = 0; i < meshes.length; i++) {
+              var random = Math.random() < 0.5;
+              meshes[i].isVisible = random;
+            }
+            break;
+          case "b":
+          case "B":
             console.log(meshes[0]);
-            meshes[0].position = new BABYLON.Vector3(0, 0, 0);
             for (let i = 0; i < 10000; i++) {
               meshes[i].isVisible = false;
+            }
+            break;
+          case "c":
+          case "C":
+            console.log(meshes[0]);
+            for (let i = 0; i < 10000; i++) {
+              meshes[i].isVisible = true;
             }
             break;
         }
