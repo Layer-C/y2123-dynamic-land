@@ -34,12 +34,12 @@ var createScene = function () {
 
   engine.displayLoadingUI();
 
-  BABYLON.SceneLoader.ImportMesh("", "", "Fullscene.glb", scene, sceneLoaded);
+  BABYLON.SceneLoader.ImportMesh("", "", "Fullscene2.glb", scene, sceneLoaded);
 
   return scene;
 };
 
-var sceneLoaded = function (meshes) {
+var sceneLoaded = function (meshes, particleSystems, skeletons, animationGroups) {
   const alpha = 3.45;
   const beta = Math.PI / 3;
   const radius = 125;
@@ -77,15 +77,19 @@ var sceneLoaded = function (meshes) {
             break;
           case "c":
           case "C":
-            console.log(meshes[0]);
-            for (let i = 0; i < 10000; i++) {
-              meshes[i].isVisible = false;
+            console.log(meshes.length);
+            for (let i = 1; i < meshes.length; i++) {
+              if (Math.random() < 0.5) {
+                meshes[i].dispose();
+                meshes[i] = null;
+              }
             }
+            console.log("After dispose: ", meshes.length);
             break;
           case "d":
           case "D":
-            console.log(meshes[0]);
-            for (let i = 0; i < 10000; i++) {
+            console.log(meshes.length);
+            for (let i = 0; i < 100; i++) {
               meshes[i].isVisible = true;
             }
             break;
