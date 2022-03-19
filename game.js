@@ -34,7 +34,7 @@ var createScene = function () {
 
   engine.displayLoadingUI();
 
-  BABYLON.SceneLoader.ImportMesh("", "", "Fullscene2.glb", scene, sceneLoaded);
+  BABYLON.SceneLoader.ImportMesh("", "", "Fullscene.glb", scene, sceneLoaded);
 
   return scene;
 };
