@@ -13,19 +13,12 @@ function makeScene(): B.Scene {
 }
 
 function createCamera(scene: B.Scene): void {
-  const alpha: number = Math.PI / 4;
+  const alpha: number = 3.45;
   const beta: number = Math.PI / 3;
-  const radius: number = 8;
+  const radius: number = 125;
   const target: B.Vector3 = new B.Vector3(0, 0, 0);
 
-  new B.ArcRotateCamera(
-    "Camera",
-    alpha,
-    beta,
-    radius,
-    target,
-    scene
-  ).attachControl(canvas, true);
+  new B.ArcRotateCamera("Camera", alpha, beta, radius, target, scene).attachControl(canvas, true);
 }
 
 function createLight(scene: B.Scene): void {
