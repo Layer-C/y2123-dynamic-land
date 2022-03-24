@@ -1,0 +1,21 @@
+{
+  "name": "dynamic-land",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ammojs-typed": "^1.0.6",
+    "babylonjs": "^5.0.0-rc.7",
+    "babylonjs-loaders": "^5.0.0-rc.7",
+    "regenerator-runtime": "^0.13.9"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  }
+}
