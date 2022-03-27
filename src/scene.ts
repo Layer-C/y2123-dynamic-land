@@ -3,22 +3,23 @@ import { canvas } from "./domItems";
 
 export const engine = new B.Engine(canvas, true);
 export const scene = makeScene();
+export var camera = createCamera(scene);
 
 function makeScene(): B.Scene {
   const scene = new B.Scene(engine);
-  createCamera(scene);
   createLight(scene);
   setBackground(scene);
   return scene;
 }
 
-function createCamera(scene: B.Scene): void {
-  const alpha: number = 3.45;
-  const beta: number = Math.PI / 3;
+function createCamera(scene: B.Scene): B.ArcRotateCamera {
+  const alpha: number = Math.PI;
+  const beta: number = Math.PI / 4;
   const radius: number = 125;
   const target: B.Vector3 = new B.Vector3(0, 0, 0);
-
-  new B.ArcRotateCamera("Camera", alpha, beta, radius, target, scene).attachControl(canvas, true);
+  let camera = new B.ArcRotateCamera("Camera", alpha, beta, radius, target, scene);
+  camera.attachControl(canvas, true);
+  return camera;
 }
 
 function createLight(scene: B.Scene): void {
