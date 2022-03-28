@@ -77,41 +77,63 @@ async function main(): Promise<void> {
   */
 
   setInterval(() => {
-    for (let i = 0; i < meshes.length; i++) {
-      var random = Math.random() < 0.6;
-      if (meshes[i].name !== "__root__" && meshes[i].name !== "ground top" && meshes[i].name !== "ground bot") {
-        //console.log(meshes[i].name);
-        meshes[i].isVisible = random;
+    if (anim) {
+      for (let i = 0; i < meshes.length; i++) {
+        var random = Math.random() < 0.6;
+        if (meshes[i].name !== "__root__" && meshes[i].name !== "ground top" && meshes[i].name !== "ground bot") {
+          //console.log(meshes[i].name);
+          meshes[i].isVisible = random;
+        }
       }
     }
   }, 500);
 
   setInterval(() => {
-    camera.alpha += 0.01;
+    if (anim) camera.alpha += 0.01;
   }, 50);
 
-  //console.log(meshes);
   let toggle: boolean = true;
+  let anim: boolean = true;
   let land: string = "land1.glb";
-  scene.onPointerObservable.add((pointerInfo) => {
-    switch (pointerInfo.type) {
-      case B.PointerEventTypes.POINTERDOWN:
-        if (toggle) {
-          land = "land2.glb";
-          toggle = false;
-        } else {
-          land = "land1.glb";
-          toggle = true;
+  scene.onKeyboardObservable.add((kbInfo) => {
+    switch (kbInfo.type) {
+      case B.KeyboardEventTypes.KEYDOWN:
+        switch (kbInfo.event.key) {
+          case "a":
+          case "A":
+            anim = true;
+            break;
+          case "b":
+          case "B":
+            anim = false;
+            for (let i = 0; i < meshes.length; i++) {
+              meshes[i].isVisible = true;
+            }
+            break;
+          case "c":
+          case "C":
+            if (toggle) {
+              land = "land2.glb";
+              toggle = false;
+            } else {
+              land = "land1.glb";
+              toggle = true;
+            }
+            meshes.forEach((mesh) => mesh.dispose());
+            B.SceneLoader.ImportMesh("", "", land, scene, (newMeshes) => {
+              meshes = newMeshes;
+              if (toggle) {
+                camera.radius = 125;
+              } else {
+                camera.radius = 100;
+              }
+            });
+            break;
+          case "d":
+          case "D":
+            console.log(meshes);
+            break;
         }
-        meshes.forEach((mesh) => mesh.dispose());
-        B.SceneLoader.ImportMesh("", "", land, scene, (newMeshes) => {
-          meshes = newMeshes;
-          if (toggle) {
-            camera.radius = 125;
-          } else {
-            camera.radius = 100;
-          }
-        });
         break;
     }
   });
