@@ -4,6 +4,6 @@ npm i -g parcel-bundler
 
 npm i
 
-add land.glb 3D file under /dist folder
+make sure .glb files are under /dist path
 
 parcel index.html

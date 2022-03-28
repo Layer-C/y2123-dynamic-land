@@ -30,6 +30,7 @@ async function main(): Promise<void> {
     autoplay: true,
   });
 
+  /*
   var animateCameraTo = function (toAlpha: number, toBeta: number, toRadius: number, animationFrames: number) {
     var animCamAlpha = new B.Animation("animCam", "alpha", 30, B.Animation.ANIMATIONTYPE_FLOAT, B.Animation.ANIMATIONLOOPMODE_CYCLE);
 
@@ -72,8 +73,8 @@ async function main(): Promise<void> {
     camera.animations.push(animCamRadius);
     scene.beginAnimation(camera, 0, animationFrames, false, 1, function () {});
   };
-
-  //animateCameraTo(alpha * 3, beta, radius, 500);
+  animateCameraTo(alpha * 3, beta, radius, 500);
+  */
 
   setInterval(() => {
     for (let i = 0; i < meshes.length; i++) {
@@ -108,7 +109,7 @@ async function main(): Promise<void> {
           if (toggle) {
             camera.radius = 125;
           } else {
-            camera.radius = 400;
+            camera.radius = 100;
           }
         });
         break;
