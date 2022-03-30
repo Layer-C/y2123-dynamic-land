@@ -93,7 +93,7 @@ async function main(): Promise<void> {
   }, 50);
 
   let toggle: boolean = true;
-  let anim: boolean = true;
+  let anim: boolean = false;
   let land: string = "land1.glb";
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {

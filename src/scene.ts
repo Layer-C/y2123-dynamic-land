@@ -20,12 +20,16 @@ function createCamera(scene: B.Scene): B.ArcRotateCamera {
   const radius: number = 125;
   const target: B.Vector3 = new B.Vector3(0, 0, 0);
   let camera = new B.ArcRotateCamera("Camera", alpha, beta, radius, target, scene);
+  camera.lowerRadiusLimit = 25;
+  camera.upperRadiusLimit = 125;
+  camera.lowerBetaLimit = Math.PI / 9;
+  camera.upperBetaLimit = Math.PI / 2.5;
   camera.attachControl(canvas, true);
   return camera;
 }
 
 function createLight(scene: B.Scene): void {
-  new B.HemisphericLight("light", new B.Vector3(1, 1, 0), scene);
+  new B.HemisphericLight("light", new B.Vector3(0, 1, 0), scene);
 }
 
 function setBackground(scene: B.Scene): void {
