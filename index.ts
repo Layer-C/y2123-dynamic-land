@@ -123,9 +123,9 @@ async function main(): Promise<void> {
             B.SceneLoader.ImportMesh("", "", land, scene, (newMeshes) => {
               meshes = newMeshes;
               if (toggle) {
-                camera.radius = 125;
+                camera.radius = 15;
               } else {
-                camera.radius = 100;
+                camera.radius = 15;
               }
             });
             break;
