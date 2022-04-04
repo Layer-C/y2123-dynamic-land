@@ -25,13 +25,13 @@ async function main(): Promise<void> {
     loadingScreen.updateLoadStatus(loadStatus);
   });
 
-  new B.Sound("Savannah", "Savannah.mp3", scene, null, {
-    loop: true,
-    autoplay: true,
-  });
-
   /*
-  var animateCameraTo = function (toAlpha: number, toBeta: number, toRadius: number, animationFrames: number) {
+    new B.Sound("Savannah", "Savannah.mp3", scene, null, {
+      loop: true,
+      autoplay: true,
+    });
+
+    var animateCameraTo = function (toAlpha: number, toBeta: number, toRadius: number, animationFrames: number) {
     var animCamAlpha = new B.Animation("animCam", "alpha", 30, B.Animation.ANIMATIONTYPE_FLOAT, B.Animation.ANIMATIONLOOPMODE_CYCLE);
 
     var keysAlpha = [];
@@ -140,6 +140,11 @@ async function main(): Promise<void> {
 
   engine.hideLoadingUI();
   engine.runRenderLoop(() => scene.render());
+
+  // Resize
+  window.addEventListener("resize", function () {
+    engine.resize();
+  });
 }
 
 main();

@@ -2,12 +2,10 @@ import * as B from "babylonjs";
 import { canvas } from "./domItems";
 
 export const engine = new B.Engine(canvas, true);
-//export const engine = new B.WebGPUEngine(canvas);
 export const scene = makeScene();
 export var camera = createCamera(scene);
 
 function makeScene(): B.Scene {
-  //await engine.initAsync();
   const scene = new B.Scene(engine);
   createLight(scene);
   setBackground(scene);
