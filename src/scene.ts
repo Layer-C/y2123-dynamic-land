@@ -13,7 +13,7 @@ function makeScene(): B.Scene {
 }
 
 function createCamera(scene: B.Scene): B.ArcRotateCamera {
-  const alpha: number = Math.PI;
+  const alpha: number = -Math.PI / 3;
   const beta: number = Math.PI / 4;
   const radius: number = 20;
   const target: B.Vector3 = new B.Vector3(0, 0, 0);
