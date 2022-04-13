@@ -2,6 +2,7 @@ import * as B from "babylonjs";
 import "regenerator-runtime/runtime";
 import { camera, scene, engine } from "./src/scene";
 import { CustomLoadingScreen } from "./src/loadingscreen";
+import { http } from "./src/http";
 import "babylonjs-loaders";
 //import Ammo from "ammojs-typed";
 //import { makeGround } from "./src/ground";
@@ -12,6 +13,16 @@ async function main(): Promise<void> {
   engine.loadingScreen = loadingScreen;
   engine.displayLoadingUI();
 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const tokenID = urlParams.get("id");
+  let glbFile = "land1.glb";
+  if (parseInt(tokenID!) >= 0) {
+    const data = await http(`https://dev-api.y2123.io/clan?id=${tokenID}`);
+    console.log(data);
+    glbFile = `land${tokenID}.glb`;
+  }
+
   /*
   const ammo = await Ammo();
   const physics: B.AmmoJSPlugin = new B.AmmoJSPlugin(true, ammo);
@@ -20,7 +31,7 @@ async function main(): Promise<void> {
   makeGround();
   */
 
-  var { meshes } = await B.SceneLoader.ImportMeshAsync("", "", "land1.glb", scene, (evt) => {
+  var { meshes } = await B.SceneLoader.ImportMeshAsync("", "", glbFile, scene, (evt) => {
     const loadStatus = ((evt.loaded * 100) / evt.total).toFixed();
     loadingScreen.updateLoadStatus(loadStatus);
   });
