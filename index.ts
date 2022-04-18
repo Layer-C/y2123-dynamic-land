@@ -4,9 +4,6 @@ import { camera, scene, engine } from "./src/scene";
 import { CustomLoadingScreen } from "./src/loadingscreen";
 import { http } from "./src/http";
 import "babylonjs-loaders";
-//import Ammo from "ammojs-typed";
-//import { makeGround } from "./src/ground";
-//import { makeCube } from "./src/cube";
 
 async function main(): Promise<void> {
   const loadingScreen = new CustomLoadingScreen("");
@@ -23,69 +20,15 @@ async function main(): Promise<void> {
     glbFile = `land${tokenID}.glb`;
   }
 
-  /*
-  const ammo = await Ammo();
-  const physics: B.AmmoJSPlugin = new B.AmmoJSPlugin(true, ammo);
-  scene.enablePhysics(new B.Vector3(0, -9.81, 0), physics);
-  makeCube();
-  makeGround();
-  */
-
   var { meshes } = await B.SceneLoader.ImportMeshAsync("", "", glbFile, scene, (evt) => {
     const loadStatus = ((evt.loaded * 100) / evt.total).toFixed();
     loadingScreen.updateLoadStatus(loadStatus);
   });
 
-  /*
-    new B.Sound("Savannah", "Savannah.mp3", scene, null, {
-      loop: true,
-      autoplay: true,
-    });
-
-    var animateCameraTo = function (toAlpha: number, toBeta: number, toRadius: number, animationFrames: number) {
-    var animCamAlpha = new B.Animation("animCam", "alpha", 30, B.Animation.ANIMATIONTYPE_FLOAT, B.Animation.ANIMATIONLOOPMODE_CYCLE);
-
-    var keysAlpha = [];
-    keysAlpha.push({
-      frame: 0,
-      value: camera.alpha,
-    });
-    keysAlpha.push({
-      frame: animationFrames,
-      value: toAlpha,
-    });
-    var animCamBeta = new B.Animation("animCam", "beta", 30, B.Animation.ANIMATIONTYPE_FLOAT, B.Animation.ANIMATIONLOOPMODE_CYCLE);
-
-    var keysBeta = [];
-    keysBeta.push({
-      frame: 0,
-      value: camera.beta,
-    });
-    keysBeta.push({
-      frame: animationFrames,
-      value: toBeta,
-    });
-    var animCamRadius = new B.Animation("animCam", "radius", 30, B.Animation.ANIMATIONTYPE_FLOAT, B.Animation.ANIMATIONLOOPMODE_CYCLE);
-
-    var keysRadius = [];
-    keysRadius.push({
-      frame: 0,
-      value: camera.radius,
-    });
-    keysRadius.push({
-      frame: animationFrames,
-      value: toRadius,
-    });
-    animCamAlpha.setKeys(keysAlpha);
-    animCamBeta.setKeys(keysBeta);
-    animCamRadius.setKeys(keysRadius);
-    camera.animations.push(animCamAlpha);
-    camera.animations.push(animCamBeta);
-    camera.animations.push(animCamRadius);
-    scene.beginAnimation(camera, 0, animationFrames, false, 1, function () {});
-  };
-  animateCameraTo(alpha * 3, beta, radius, 500);
-  */
+  new B.Sound("Savannah", "Savannah.mp3", scene, null, {
+    loop: true,
+    autoplay: true,
+  });
 
   setInterval(() => {
     if (anim) {
@@ -103,9 +46,10 @@ async function main(): Promise<void> {
     if (anim) camera.alpha += 0.01;
   }, 50);
 
-  let toggle: boolean = true;
   let anim: boolean = false;
-  let land: string = "land1.glb";
+  if (parseInt(tokenID!) % 2 === 0) {
+    anim = true;
+  }
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case B.KeyboardEventTypes.KEYDOWN:
@@ -123,25 +67,6 @@ async function main(): Promise<void> {
             break;
           case "c":
           case "C":
-            if (toggle) {
-              land = "land2.glb";
-              toggle = false;
-            } else {
-              land = "land1.glb";
-              toggle = true;
-            }
-            meshes.forEach((mesh) => mesh.dispose());
-            B.SceneLoader.ImportMesh("", "", land, scene, (newMeshes) => {
-              meshes = newMeshes;
-              if (toggle) {
-                camera.radius = 15;
-              } else {
-                camera.radius = 15;
-              }
-            });
-            break;
-          case "d":
-          case "D":
             console.log(meshes);
             break;
         }
