@@ -15,11 +15,11 @@ function makeScene(): B.Scene {
 function createCamera(scene: B.Scene): B.ArcRotateCamera {
   const alpha: number = -Math.PI / 2;
   const beta: number = Math.PI / 2.5;
-  const radius: number = 25;
+  const radius: number = 22;
   const target: B.Vector3 = new B.Vector3(0, 0, 0);
   let camera = new B.ArcRotateCamera("Camera", alpha, beta, radius, target, scene);
   camera.lowerRadiusLimit = 3;
-  camera.upperRadiusLimit = 25;
+  camera.upperRadiusLimit = 22;
   camera.lowerBetaLimit = Math.PI / 9;
   camera.upperBetaLimit = Math.PI / 2.5;
   camera.attachControl(canvas, true);
