@@ -26,10 +26,10 @@ async function main(): Promise<void> {
   });
 
   new B.Sound("Savannah", "Savannah.mp3", scene, null, {
-    loop: true,
+    loop: false,
     autoplay: true,
   });
-
+  /*
   setInterval(() => {
     if (anim) {
       for (let i = 0; i < meshes.length; i++) {
@@ -41,9 +41,9 @@ async function main(): Promise<void> {
       }
     }
   }, 500);
-
+  */
   setInterval(() => {
-    if (anim) camera.alpha += 0.01;
+    if (anim) camera.alpha += 0.005;
   }, 50);
 
   let anim: boolean = false;
@@ -61,13 +61,9 @@ async function main(): Promise<void> {
           case "b":
           case "B":
             anim = false;
-            for (let i = 0; i < meshes.length; i++) {
-              meshes[i].isVisible = true;
-            }
-            break;
-          case "c":
-          case "C":
-            console.log(meshes);
+            //for (let i = 0; i < meshes.length; i++) {
+            //  meshes[i].isVisible = true;
+            //}
             break;
         }
         break;
