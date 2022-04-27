@@ -2,7 +2,7 @@ import * as B from "babylonjs";
 import "regenerator-runtime/runtime";
 import { camera, scene, engine } from "./src/scene";
 import { CustomLoadingScreen } from "./src/loadingscreen";
-import { http } from "./src/http";
+//import { http } from "./src/http";
 import "babylonjs-loaders";
 
 async function main(): Promise<void> {
@@ -15,12 +15,13 @@ async function main(): Promise<void> {
   const tokenID = urlParams.get("id");
   let glbFile = "land1.glb";
   if (parseInt(tokenID!) >= 0) {
-    const data = await http(`https://dev-api.y2123.io/clan?id=${tokenID}`);
-    console.log(data);
+    //const data = await http(`https://dev-api.y2123.io/clan?id=${tokenID}`);
+    //console.log(data);
     glbFile = `land${tokenID}.glb`;
   }
 
-  var { meshes } = await B.SceneLoader.ImportMeshAsync("", "", glbFile, scene, (evt) => {
+  //var { meshes } = 
+  await B.SceneLoader.ImportMeshAsync("", "", glbFile, scene, (evt) => {
     const loadStatus = ((evt.loaded * 100) / evt.total).toFixed();
     loadingScreen.updateLoadStatus(loadStatus);
   });
@@ -46,10 +47,7 @@ async function main(): Promise<void> {
     if (anim) camera.alpha += 0.005;
   }, 50);
 
-  let anim: boolean = false;
-  if (parseInt(tokenID!) % 2 === 0) {
-    anim = true;
-  }
+  let anim: boolean = true;
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case B.KeyboardEventTypes.KEYDOWN:
